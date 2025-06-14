@@ -1,0 +1,34 @@
+2025-05-26 21:54:13,275 - INFO - Starting MySQL to Redis migration process
+2025-05-26 21:54:13,291 - INFO - Successfully connected to MySQL database
+2025-05-26 21:54:13,294 - INFO - Successfully connected to Redis
+2025-05-26 21:54:13,294 - INFO - Extracting session data from MySQL...
+2025-05-26 21:54:13,371 - INFO - Extracted 15 session records from MySQL
+2025-05-26 21:54:13,389 - INFO - Starting migration of 15 sessions...
+2025-05-26 21:54:13,402 - WARNING - Session sess_1k2l3m4n5o6p7q8r has already expired, but storing anyway
+2025-05-26 21:54:13,404 - WARNING - Session sess_3c4d5e6f7g8h9i0j has already expired, but storing anyway
+2025-05-26 21:54:13,404 - WARNING - Session sess_3m4n5o6p7q8r9s0t has already expired, but storing anyway
+2025-05-26 21:54:13,407 - WARNING - Session sess_5e6f7g8h9i0j1k2l has already expired, but storing anyway
+2025-05-26 21:54:13,407 - INFO - Migrated 10 sessions...
+2025-05-26 21:54:13,407 - WARNING - Session sess_5o6p7q8r9s0t1u2v has already expired, but storing anyway
+2025-05-26 21:54:13,408 - WARNING - Session sess_7g8h9i0j1k2l3m4n has already expired, but storing anyway
+2025-05-26 21:54:13,410 - WARNING - Session sess_9i0j1k2l3m4n5o6p has already expired, but storing anyway
+2025-05-26 21:54:13,410 - INFO - Migration completed. Success: 15, Failed: 0
+2025-05-26 21:54:13,411 - INFO - Verification: MySQL sessions: 15, Redis sessions: 15
+2025-05-26 21:54:13,428 - INFO - Sample verification for session:sess_8h9i0j1k2l3m4n5o:
+2025-05-26 21:54:13,429 - INFO -   - Hash fields: 19
+2025-05-26 21:54:13,429 - INFO -   - TTL: 55546 seconds
+2025-05-26 21:54:13,429 - INFO -   - User ID: 8
+2025-05-26 21:54:13,429 - INFO -   - Username: lisa_taylor
+2025-05-26 21:54:13,431 - INFO - Sample verification for session:sess_3c4d5e6f7g8h9i0j:
+2025-05-26 21:54:13,431 - INFO -   - Hash fields: 19
+2025-05-26 21:54:13,431 - INFO -   - TTL: -1 seconds
+2025-05-26 21:54:13,431 - INFO -   - User ID: 3
+2025-05-26 21:54:13,431 - INFO -   - Username: mike_wilson
+2025-05-26 21:54:13,432 - INFO - Sample verification for session:sess_3m4n5o6p7q8r9s0t:
+2025-05-26 21:54:13,432 - INFO -   - Hash fields: 17
+2025-05-26 21:54:13,432 - INFO -   - TTL: -1 seconds
+2025-05-26 21:54:13,432 - INFO -   - User ID: 13
+2025-05-26 21:54:13,432 - INFO -   - Username: kevin_white
+2025-05-26 21:54:13,432 - INFO - Migration verification passed!
+2025-05-26 21:54:13,432 - INFO - MySQL connection closed
+2025-05-26 21:54:13,433 - INFO - Redis connection closed
