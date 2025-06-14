@@ -12,25 +12,30 @@ import mysql.connector
 import redis
 import json
 import logging
+import os
 from datetime import datetime, timezone
 from typing import Dict, Any, Optional, List
 import sys
 from dataclasses import dataclass
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 @dataclass
 class DatabaseConfig:
     """Configuration for database connections"""
-    mysql_host: str = "localhost"
-    mysql_port: int = 3306
-    mysql_user: str = "your_username"
-    mysql_password: str = "your_password"
-    mysql_database: str = "user_session_management"
+    mysql_host: str = os.getenv("MYSQL_HOST", "localhost")
+    mysql_port: int = int(os.getenv("MYSQL_PORT", "3306"))
+    mysql_user: str = os.getenv("MYSQL_USER", "your_username")
+    mysql_password: str = os.getenv("MYSQL_PASSWORD", "your_password")
+    mysql_database: str = os.getenv("MYSQL_DATABASE", "user_session_management")
 
-    redis_host: str = "localhost"
-    redis_port: int = 6379
-    redis_db: int = 0
-    redis_password: Optional[str] = None  # Set if Redis has password
+    redis_host: str = os.getenv("REDIS_HOST", "localhost")
+    redis_port: int = int(os.getenv("REDIS_PORT", "6379"))
+    redis_db: int = int(os.getenv("REDIS_DB", "0"))
+    redis_password: Optional[str] = os.getenv("REDIS_PASSWORD")  # Set if Redis has password
 
 
 class SessionMigrator:
@@ -48,7 +53,7 @@ class SessionMigrator:
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
             handlers=[
-                logging.FileHandler('migration.log'),
+                logging.FileHandler('logs/migration.log'),
                 logging.StreamHandler(sys.stdout)
             ]
         )
@@ -384,24 +389,15 @@ def main():
     print("MySQL to Redis Session Migration Tool")
     print("=====================================")
 
-    # Create configuration
-    config = DatabaseConfig(
-        mysql_host="localhost",
-        mysql_port=3306,
-        mysql_user="pycharm_user",
-        mysql_password="your_password",
-        mysql_database="user_session_management",
-        redis_host="localhost",
-        redis_port=6379,
-        redis_db=0
-    )
-    
+    # Create configuration using environment variables (with defaults)
+    config = DatabaseConfig()
+
     # Create migrator instance
     migrator = SessionMigrator(config)
-    
+
     # Run migration
     success = migrator.main_migration_process()
-    
+
     if success:
         print("\n Migration completed successfully!")
         print("Check the migration.log file for detailed logs.")
@@ -411,7 +407,7 @@ def main():
     else:
         print("\n Migration failed! Check the migration.log file for errors.")
         return 1
-    
+
     return 0
 
 
